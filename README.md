@@ -324,6 +324,8 @@ Last not least create a `slot` element, this will render all the pages under thi
 
 Let's add a few pages to your app.
 
+Routes or locations, i.e. `example.com`**/about**, `example.com`**/work**, `example.com`**/contact** of your SvelteKit app are created with folders inside the `routes` folder.
+
 Create the file `+page.svelte` in the `sveltekit/src/routes/about` folder.
 
 Create a link to the `index` page on the `about` page.

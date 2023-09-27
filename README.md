@@ -185,3 +185,137 @@ Open a `style` element under the `h2` element and style the page to your liking,
 ```
 
 <img src="/sveltekit/static/sveltekit-style-index-page.png">
+
+**`git checkout 005-create-global-styles`**
+
+Let's add some default global styles to your app.
+
+Create the file `app.css` in the `sveltekit/src/` folder.
+
+**sveltekit/src/app.css**
+
+```css
+/* https://andy-bell.co.uk/a-modern-css-reset/ START */
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+/* https://andy-bell.co.uk/a-modern-css-reset/ END */
+
+html {
+  background-color: #002244;
+  color: blanchedalmond;
+}
+
+body {
+  padding: 2rem;
+}
+
+body,
+form,
+input,
+button,
+a {
+  font-family: sans-serif;
+  font-size: 1.6rem;
+}
+a {
+  color: whitesmoke;
+}
+a:hover {
+  color: green;
+}
+```
+
+For the styles to apply globally to your app you are going to use a `+layout.svelte` file.
+
+<a href="https://learn.svelte.dev/tutorial/layouts" target="_blank">Reference -> https://learn.svelte.dev/tutorial/layouts</a>
+
+Create the file `+layout.svelte` in the `sveltekit/src/routes` folder.
+
+At the top of the file create a `script` element and import the `app.css` file.
+
+Last not least create a `slot` element, this will render all the pages under this layout and apply the global styles.
+
+**sveltekit/src/routes/+layout.svelte**
+
+```ts
+<script lang="ts">
+    // import your global CSS
+	import '../app.css';
+</script>
+
+<slot />
+```
+
+<img src="/sveltekit/static/sveltekit-global-styles-with-layout.png">

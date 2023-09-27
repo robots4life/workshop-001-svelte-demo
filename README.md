@@ -11,10 +11,10 @@ Repository
 
 ### 1.0 Download ZIP file or Clone Repository
 
-Download ZIP file
+Download ZIP file  
 `https://github.com/robots4life/talk-001-get-post-svelte-kit-server/archive/refs/heads/master.zip`
 
-Clone Repository
+Clone Repository  
 `git clone https://github.com/robots4life/workshop-001-svelte-demo.git`
 
 `gh repo clone robots4life/workshop-001-svelte-demo`

@@ -1,8 +1,8 @@
+<script lang="ts">
+	import type { PageData } from './$types';
+	export let data: PageData;
+</script>
+
 <h1>Contact</h1>
 
-<p>
-	Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorem dolorum eveniet aperiam. Nostrum
-	laudantium minus facilis reiciendis tempora similique suscipit repellat a eos recusandae. Modi,
-	excepturi officiis sit voluptatum recusandae facere et quam inventore aspernatur aut quo,
-	doloribus placeat eius accusantium ex similique vero optio fugiat totam eos a hic.
-</p>
+<pre>{JSON.stringify(data, null, 2)}</pre>

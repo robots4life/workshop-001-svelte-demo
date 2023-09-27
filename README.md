@@ -743,3 +743,75 @@ If you like, of course you can use different HTML elements for the `postsData`, 
 Go to your `about` page and just enjoy.. :tada: :smile: :rocket: :sunglasses:
 
 <a href="http://localhost:5173/about" target="_blank">http://localhost:5173/about</a>
+
+## 8.0 Fetch Data from a Resource and Load it into a Page
+
+So far you have worked with data that you created on the fly on the server, the array of objects, `postsData`, in the `+page.server.ts` file of your `about` page.
+
+Let's have a quick look how you can `fetch` data from a resource and load that into a page.
+
+You are going to `fetch` data from <a href="https://dummyjson.com/posts" target="_blank">https://dummyjson.com/posts</a> and load it into your `contact` page.
+
+Here is a quick recap how the `fetch` API works.
+
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch" target="_blank">Reference -> https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch</a>
+
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Response/json" target="_blank">Reference -> https://developer.mozilla.org/en-US/docs/Web/API/Response/json</a>
+
+Note that despite the method being named `json()`, **the result is not JSON** but is instead **the result of taking JSON as input and parsing it to produce a JavaScript object**.
+
+**Fetch API**
+
+```ts
+async function fetchPosts() {
+  // the request
+  const request = await fetch("https://dummyjson.com/posts");
+
+  // the response, turn the JSON response and parse it to a JavaScript object
+  const response = await request.json();
+
+  // return the response from the fetchPosts() function
+  return { dummyJSONPostsData: response };
+}
+```
+
+Create a file `+page.server.ts` in the `sveltekit/src/routes/contact` folder.
+
+**sveltekit/src/routes/contact/+page.server.ts**
+
+```ts
+// import the type for the load function
+import type { PageServerLoad } from "./$types";
+
+export const load: PageServerLoad = async () => {
+  // the request
+  const request = await fetch("https://dummyjson.com/posts");
+
+  // the response, turn the JSON response and parse it to a JavaScript object
+  const response = await request.json();
+
+  // return the response from the load function
+  return { dummyJSONPostsData: response };
+};
+```
+
+Display the loaded data on your `contact` page.
+
+**sveltekit/src/routes/contact/+page.svelte**
+
+```ts
+<script lang="ts">
+	import type { PageData } from './$types';
+	export let data: PageData;
+</script>
+
+<h1>Contact</h1>
+
+<pre>{JSON.stringify(data, null, 2)}</pre>
+```
+
+<img src="/sveltekit/static/sveltekit-contact-page-fetch-dummyjson-posts.png">
+
+Go to your `contact` page and check out the posts you `fetch`ed from the DummyJSON API and `load`ed into your page.. :tada: :sunglasses:
+
+<a href="http://localhost:5173/contact" target="_blank">http://localhost:5173/contact</a>

@@ -99,3 +99,55 @@ Stuck? Visit us at https://svelte.dev/chat
 `npm install`
 
 `pnpm install`
+
+## 4.0 Tour of SvelteKit
+
+**`git checkout 003-tour-of-sveltekit`**
+
+Let's run SvelteKit and explore a little bit..
+
+`npm run dev`
+
+`pnpm dev`
+
+Go to `http://localhost:5173/` in your browser.
+
+<img src="/sveltekit/static/default-sveltekit-start.png">
+
+In the directory `sveltekit/src/routes` open the `+page.svelte` file.
+
+**sveltekit/src/routes/+page.svelte**
+
+```html
+<h1>Welcome to SvelteKit</h1>
+<p>
+  Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the
+  documentation
+</p>
+```
+
+Add `<h2>Hello Everyone</h2>` under the `p` element.
+
+**sveltekit/src/routes/+page.svelte**
+
+```html
+<h1>Welcome to SvelteKit</h1>
+<p>
+  Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the
+  documentation
+</p>
+
+<h2>Hello Everyone</h2>
+```
+
+While doing so keep the browser tab with SvelteKit running in it open and observe that any changes you make to the `+page.svelte` file are immediately shown.
+
+Right now you are on the `index route` or `Home page` of your SvelteKit project.
+
+<img src="/sveltekit/static/sveltekit-index-route.png">
+
+As you can see there is a `routes` folder.
+
+Folders and files **inside** this `routes` folder determine the **structure** of your SvelteKit app.
+
+Web pages in SvelteKit are created with `+page.svelte` files.

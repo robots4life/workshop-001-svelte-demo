@@ -886,6 +886,6 @@ history,american,crime
 
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await" target="_blank">Reference -> https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await</a>
 
-Go to your `contact` page and check out the posts you `fetch`ed from the DummyJSON API and `load`ed into your page and now display in an Svelte `each` block.. :tada: :sunglasses:
+Go to your `contact` page and check out the posts you `fetch`ed from the DummyJSON API and `load`ed into your page and now display in a Svelte `each` block.. :tada: :sunglasses:
 
 <a href="http://localhost:5173/contact" target="_blank">http://localhost:5173/contact</a>

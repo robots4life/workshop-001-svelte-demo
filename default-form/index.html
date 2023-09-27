@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      html {
+        background-color: #002244;
+        color: blanchedalmond;
+      }
+
+      body {
+        padding: 2rem;
+      }
+
+      body,
+      form,
+      input,
+      button,
+      a {
+        font-family: sans-serif;
+        font-size: 1.6rem;
+      }
+      a {
+        color: whitesmoke;
+      }
+      a:hover {
+        color: green;
+      }
+    </style>
+    <title>Default Form</title>
+  </head>
+  <body>
+    <form id="default_form" method="POST" action="">
+      <label for="form_text">Form Text Label</label>
+      <input
+        type="text"
+        name="form_text"
+        id="form_text"
+        value="Lorem ipsum dolor sit amet."
+      />
+      <button form="default_form" type="submit">Submit</button>
+    </form>
+  </body>
+</html>

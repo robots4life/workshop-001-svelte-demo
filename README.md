@@ -434,3 +434,63 @@ To use your `Navigation` component you import it from the folder where you creat
 ```
 
 Make sure to remove the hard coded anchor elements from the `index`, `about` and `contact` page.
+
+## 5.0 Loading Data for Pages
+
+**`git checkout 008-loading-data-for-pages`**
+
+You already have a few pages up and running, nice. :tada:
+
+Let's have a look at how data for these pages can be loaded into them.
+
+<a href="https://learn.svelte.dev/tutorial/page-data" target="_blank">Reference -> https://learn.svelte.dev/tutorial/page-data</a>
+
+For now you are going to use a `+page.server.ts` file to load data for a page.
+
+You could also use a `+page.ts` file however this would involve touching on advanced topics that you can explore later on.
+
+For the time being, let's just say that the default file to use for loading data into a page is a `+page.server.ts` file.
+
+Create the file `+page.server.ts` in the `sveltekit/src/routes/about` folder.
+
+**sveltekit/src/routes/about/+page.server.ts**
+
+```ts
+// use a load function to load data for the page
+export const load = () => {
+  // return data from the load function in an object
+  return { hello: "world" };
+};
+```
+
+To display the loaded data for the page you need a `data` property on the page.
+
+The loaded data for the page is passed to the page inside this `data` property.
+
+At the top of the file create a `script` element.
+
+Inside the `script` element you `export` the `data` property that is passed from the `load` function.
+
+**sveltekit/src/routes/about/+page.svelte**
+
+```ts
+<script lang="ts">
+	import type { PageData } from './$types';
+	export let data: PageData;
+</script>
+
+<pre>{JSON.stringify(data, null, 2)}</pre>
+
+<h1>About</h1>
+
+<p>
+	Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi asperiores dolores, quos ducimus
+	aspernatur ex doloribus. Aut illo in non?
+</p>
+```
+
+Go to your `about` page and admire the data you have just loaded into the page. :tada: :heart: :rocket:
+
+<a href="http://localhost:5173/about" target="_blank">http://localhost:5173/about</a>
+
+<img src="/sveltekit/static/sveltekit-about-page-load-data.png">

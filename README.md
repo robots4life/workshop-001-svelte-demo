@@ -396,3 +396,41 @@ Create a link to the `contact` page on the `index` page.
   }
 </style>
 ```
+
+**`git checkout 007-create-navigation-component`**
+
+Instead of having the link to the `index`, `about` and `contact` page inside the markup for those pages you can use a `Navigation` component.
+
+Let's create your first component.
+
+Create the file `Navigation.svelte` in the `sveltekit/src/lib/components` folder.
+
+**sveltekit/src/lib/components/Navigation.svelte**
+
+```html
+<a href="/">Home</a>
+<a href="/about">About</a>
+<a href="/contact">Contact</a>
+<hr />
+```
+
+Now to add your `Navigation` component to your app you can either add it to each `+page.svelte` file of each page or use the `+layout.svelte` file where you already added the global styles.
+
+To use your `Navigation` component you import it from the folder where you created it.
+
+**sveltekit/src/routes/+layout.svelte**
+
+```html
+<script lang="ts">
+  // import your global CSS
+  import "../app.css";
+
+  // import your Navigation component
+  import Navigation from "$lib/components/Navigation.svelte";
+</script>
+
+<Navigation />
+<slot />
+```
+
+Make sure to remove the hard coded anchor elements from the `index`, `about` and `contact` page.

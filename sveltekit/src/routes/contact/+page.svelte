@@ -1,6 +1,3 @@
-<a href="/">Home</a>
-<hr />
-
 <h1>Contact</h1>
 
 <p>

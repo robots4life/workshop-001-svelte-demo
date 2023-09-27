@@ -494,3 +494,55 @@ Go to your `about` page and admire the data you have just loaded into the page. 
 <a href="http://localhost:5173/about" target="_blank">http://localhost:5173/about</a>
 
 <img src="/sveltekit/static/sveltekit-about-page-load-data.png">
+
+## 6.0 Work with Loaded Data in Page Markup
+
+**`git checkout 009-work-with-loaded-data-in-page-markup`**
+
+Let's have a look at how you can work with the loaded data in a page.
+
+Currently in the `+page.svelte` file for your `about` page you are rendering the `data` object that is passed from the `load` function in a `pre` element.
+
+However there is nicer ways to display the data inside the `data` property.
+
+Make sure to understand that you can work with this `data` object in any way possible with JavaScript.
+
+Change the returned data in the `load` function to this.
+
+You are now also using the correct type for the `load` function.
+
+**sveltekit/src/routes/about/+page.server.ts**
+
+```ts
+// import the type for the load function
+import type { PageServerLoad } from "./$types";
+
+// use a load function to load data for the page
+export const load: PageServerLoad = () => {
+  // return data from the load function in an object
+  return { intro: "Welcome to the SvelteKit Workshop @ Liip. :)" };
+};
+```
+
+Change the markup for the `about` page to this.
+
+To use data in the page markup simply use curly brackets `{}` and reference the `data` object with any properties that it may have.
+
+**sveltekit/src/routes/about/+page.svelte**
+
+```html
+<script lang="ts">
+  import type { PageData } from "./$types";
+  export let data: PageData;
+</script>
+
+<h1>About</h1>
+
+<p>{data.intro}</p>
+```
+
+<img src="/sveltekit/static/sveltekit-about-page-load-data-use-markup.png">
+
+Again, go to your `about` page and admire the data you have just loaded into the page and are using inside curly brackets in your page markup. :tada: :muscle: :sunglasses: :cool:
+
+<a href="http://localhost:5173/about" target="_blank">http://localhost:5173/about</a>

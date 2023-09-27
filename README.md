@@ -854,7 +854,7 @@ Note what is happening to the post tags.
 
 `element.tags` is an object.
 
-With the `toString()` method that object it turned into a string, separated by commas between each value.
+With the `toString()` method that object is turned into a string, separated by commas between each value.
 
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toString" target="_blank">Reference -> https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toString</a>
 

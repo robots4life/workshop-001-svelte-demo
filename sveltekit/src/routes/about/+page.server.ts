@@ -7,7 +7,7 @@ export const load: PageServerLoad = () => {
 	const posts = [
 		{
 			id: crypto.randomUUID(),
-			title: 'How to load data into page',
+			title: 'How to load data into a page',
 			post: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eum impedit minus ea!'
 		},
 		{
@@ -17,7 +17,7 @@ export const load: PageServerLoad = () => {
 		},
 		{
 			id: crypto.randomUUID(),
-			title: 'How to load work with objects',
+			title: 'How to work with objects',
 			post: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur quisquam vitae vero et alias id quas facilis tempore? Vel, omnis?'
 		},
 		{

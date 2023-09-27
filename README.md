@@ -618,3 +618,128 @@ Let's quickly have a look at the returned data that is passed to your `about` pa
 Again, go to your `about` page and enjoy.. :tada:
 
 <a href="http://localhost:5173/about" target="_blank">http://localhost:5173/about</a>
+
+**`git checkout 011-use-each-block-with-array-of-objects-in-page`**
+
+Now instead of showing the raw `postData` Svelte has a logic block you can use to iterate of an array of objects.
+
+For this you use the `each` block Svelte provides.
+
+<a href="https://learn.svelte.dev/tutorial/each-blocks" target="_blank">Reference -> https://learn.svelte.dev/tutorial/each-blocks</a>
+
+Let's see how you can use an `each` block with the `postsData`.
+
+Similar to iterating over an array with the `forEach` method you have an `element` and an `index`.
+
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach" target="_blank">Reference -> https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach</a>
+
+The `element` is the current element of the array. it is that simple.
+
+In your case it is a single `object` of the array of objects, the `postsData`.
+
+The `index` is the index of the current element in the array, so the number of the position of the element in the array.
+
+Let's see how this works..
+
+The first line of the `each` block is this.
+
+1. You open the curly brackets, then use the `each` keyword with a `#` in front of it.
+
+2. Then you give the block the data it should iterate over.
+
+In your case you take the `data` property that is available on the page. Remember that was passed the `postsData` array of objects to the page from the `load` function with this line in the `+page.server.ts` file for the `about` page.
+
+**sveltekit/src/routes/about/+page.server.ts**
+
+```ts
+return { postsData: posts };
+```
+
+So this `data` property on the page has a property itself, it is `postsData`.
+
+With the dot notation you access the property `postsData` on the `data` object.
+
+`data.postsData`
+
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects#accessing_properties" target="_blank">Reference -> https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects#accessing_properties</a>
+
+3. Then you use the keyword `as` and pass the `element` of the array.
+
+4. Last not least, you can optionally provide the `index` of the array, this you do by having a comma and then the `index` keyword.
+
+This is what the first line of the `each` block in the end looks like.
+
+```ts
+{#each data.postsData as element, index}
+```
+
+Before you work with the data inside the `each` block I recommend to the close the `each` block with `{/each}`.
+
+```ts
+{#each data.postsData as element, index}
+	// you have access to the postsData elements and index in here
+{/each}
+```
+
+So now let's work with the `postsData` inside the `each` block.
+
+**sveltekit/src/routes/about/+page.svelte**
+
+```ts
+<script lang="ts">
+	import type { PageData } from './$types';
+	export let data: PageData;
+</script>
+
+<h1>About</h1>
+
+<!-- <pre>{JSON.stringify(data, null, 2)}</pre> -->
+
+{#each data.postsData as element, index}
+	<div>index: {index}</div>
+	<div>element : {element}</div>
+{/each}
+```
+
+<img src="/sveltekit/static/sveltekit-about-page-each-block-index-element.png">
+
+**sveltekit/src/routes/about/+page.svelte**
+
+Just like accessed the `postsData` property of the `data ` object with dot notation when you passed it to the `each` block you can do the same inside the `each` block with each `element`.
+
+```ts
+<script lang="ts">
+	import type { PageData } from './$types';
+	export let data: PageData;
+</script>
+
+<h1>About</h1>
+
+<!-- <pre>{JSON.stringify(data, null, 2)}</pre> -->
+
+{#each data.postsData as element, index}
+	<div>index: {index}</div>
+	<div>element id: {element.id}</div>
+	<div>element title: {element.title}</div>
+	<div>element post: {element.post}</div>
+	<hr />
+{/each}
+```
+
+<img src="/sveltekit/static/sveltekit-about-page-each-block-index-element-properties.png">
+
+If you like, of course you can use different HTML elements for the `postsData`, so a `paragraph` and a `heading` for example.
+
+```ts
+{#each data.postsData as element, index}
+	<p>index: {index}</p>
+	<p>element id: {element.id}</p>
+	<h1>element title: {element.title}</h1>
+	<p>element post: {element.post}</p>
+	<hr />
+{/each}
+```
+
+Go to your `about` page and just enjoy.. :tada: :smile: :rocket: :sunglasses:
+
+<a href="http://localhost:5173/about" target="_blank">http://localhost:5173/about</a>

@@ -183,3 +183,5 @@ Open a `style` element under the `h2` element and style the page to your liking,
   }
 </style>
 ```
+
+<img src="/sveltekit/static/sveltekit-style-index-page.png">

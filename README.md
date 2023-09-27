@@ -21,7 +21,7 @@ Clone Repository
 
 ## 2.0 Default Form Example
 
-###**`git checkout 001-default-form-example`**
+**`git checkout 001-default-form-example`**
 
 Let's have a quick look at what a default form with `POST` as `method` does in the browser.
 

@@ -42,6 +42,7 @@ Let's have a quick look at what a default form with `POST` as `method` does in t
 Let's create and install SvelteKit.
 
 **Create**
+
 `npm create svelte@latest`
 
 `pnpm create svelte@latest`

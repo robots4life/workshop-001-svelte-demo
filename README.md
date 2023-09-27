@@ -151,3 +151,35 @@ As you can see there is a `routes` folder.
 Folders and files **inside** this `routes` folder determine the **structure** of your SvelteKit app.
 
 Web pages in SvelteKit are created with `+page.svelte` files.
+
+**`git checkout 004-add-styles-to-index-page`**
+
+Let's style the index page a little bit.
+
+Open a `style` element under the `h2` element and style the page to your liking, I have added these styles.
+
+**sveltekit/src/routes/+page.svelte**
+
+```html
+<h1>Welcome to SvelteKit</h1>
+<p>
+  Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the
+  documentation
+</p>
+
+<h2>Hello Everyone</h2>
+
+<style>
+  h1 {
+    color: orange;
+    font-size: 3rem;
+  }
+  h2 {
+    color: cornflowerblue;
+    font-size: 2rem;
+  }
+  p {
+    font-size: 1.4rem;
+  }
+</style>
+```

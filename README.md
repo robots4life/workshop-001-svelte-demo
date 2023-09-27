@@ -817,3 +817,73 @@ Display the loaded data on your `contact` page.
 Go to your `contact` page and check out the posts you `fetch`ed from the DummyJSON API and `load`ed into your page.. :tada: :sunglasses:
 
 <a href="http://localhost:5173/contact" target="_blank">http://localhost:5173/contact</a>
+
+### 8.1 Use an Each block on the Contact Page for the Posts Data
+
+**`git checkout 013-use-each-block-for-posts-data-on-contact-page`**
+
+Just like did on your `about` page, iterate the `dummyJSONPostsData` object with an `each` block.
+
+**sveltekit/src/routes/contact/+page.svelte**
+
+```ts
+<script lang="ts">
+	import type { PageData } from './$types';
+	export let data: PageData;
+</script>
+
+<h1>Contact</h1>
+
+<!-- <pre>{JSON.stringify(data, null, 2)}</pre> -->
+
+{#each data.dummyJSONPostsData.posts as element, index}
+	<p>index: {index}</p>
+	<p>element id: {element.id}</p>
+	<h1>{element.title}</h1>
+	<p>{element.body}</p>
+	<h3>posted by userId: {element.userId}</h3>
+	<p>tags: {element.tags.toString().replaceAll(',', ', ')}</p>
+	<hr />
+{/each}
+
+```
+
+Note what is happening to the post tags.
+
+`element.tags` is an object.
+
+With the `toString()` method that object it turned into a string, separated by commas between each value.
+
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toString" target="_blank">Reference -> https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toString</a>
+
+With the `replaceAll()` method each comma in the string is replaced with a comma and an extra space.
+
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replaceAll" target="_blank">Reference -> https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replaceAll</a>
+
+Hence the tags display as this
+
+```html
+history, american, crime
+```
+
+as opposed to this.
+
+```html
+history,american,crime
+```
+
+<img src="/sveltekit/static/sveltekit-contact-page-dummyjson-posts-each-block.png">
+
+**Question** : What is the important different in the `load` function of your `about` page and your `contact` page besides that fact that you work with data from an external resource ?
+
+**Answer** : You are making the `load` function of your `contact` page asynchronous by prefixing it with the `async` keyword and using `await` to wait for the `fetch` request to complete as well as for the parsing, `.json()`, of the JSON data into a JavaScript object.
+
+<a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Introducing" target="_blank">Reference -> https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Introducing</a>
+
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/async_function" target="_blank">Reference -> https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/async_function</a>
+
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await" target="_blank">Reference -> https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await</a>
+
+Go to your `contact` page and check out the posts you `fetch`ed from the DummyJSON API and `load`ed into your page and now display in an Svelte `each` block.. :tada: :sunglasses:
+
+<a href="http://localhost:5173/contact" target="_blank">http://localhost:5173/contact</a>

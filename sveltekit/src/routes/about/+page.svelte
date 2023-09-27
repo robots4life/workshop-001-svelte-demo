@@ -5,4 +5,4 @@
 
 <h1>About</h1>
 
-<p>{data.intro}</p>
+<pre>{JSON.stringify(data, null, 2)}</pre>

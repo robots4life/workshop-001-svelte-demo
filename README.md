@@ -546,3 +546,75 @@ To use data in the page markup simply use curly brackets `{}` and reference the 
 Again, go to your `about` page and admire the data you have just loaded into the page and are using inside curly brackets in your page markup. :tada: :muscle: :sunglasses: :cool:
 
 <a href="http://localhost:5173/about" target="_blank">http://localhost:5173/about</a>
+
+## 7.0 Work with an Array of Objects in Page Markup
+
+**`git checkout 010-work-with-array-of-objects-in-page-markup`**
+
+Let's you have more than just a simple object that you are loading into your page.
+
+Change the `load` function of your `about` page to this.
+
+`crypto.randomUUID()` creates a random UUID.
+
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Crypto/randomUUID" target="_blank">Reference -> https://developer.mozilla.org/en-US/docs/Web/API/Crypto/randomUUID</a>
+
+**sveltekit/src/routes/about/+page.server.ts**
+
+```ts
+// import the type for the load function
+import type { PageServerLoad } from "./$types";
+
+// use a load function to load data for the page
+export const load: PageServerLoad = () => {
+  // array of objects
+  const posts = [
+    {
+      id: crypto.randomUUID(),
+      title: "How to load data into page",
+      post: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eum impedit minus ea!",
+    },
+    {
+      id: crypto.randomUUID(),
+      title: "How to work with SvelteKit",
+      post: "Lorem ipsum dolor sit amet consectetur.",
+    },
+    {
+      id: crypto.randomUUID(),
+      title: "How to load work with objects",
+      post: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur quisquam vitae vero et alias id quas facilis tempore? Vel, omnis?",
+    },
+    {
+      id: crypto.randomUUID(),
+      title: "How to work with arrays",
+      post: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias perferendis, facilis expedita labore molestiae praesentium exercitationem? Similique explicabo quae error? Fugit iusto nihil eligendi.",
+    },
+  ];
+
+  // return data from the load function in an object
+  return { postsData: posts };
+};
+```
+
+Let's quickly have a look at the returned data that is passed to your `about` page by displaying it inside a `pre` element while also using the `JSON.stringify` method to show the contents of the `data` property.
+
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify" target="_blank">Reference -> https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify</a>
+
+**sveltekit/src/routes/about/+page.svelte**
+
+```html
+<script lang="ts">
+  import type { PageData } from "./$types";
+  export let data: PageData;
+</script>
+
+<h1>About</h1>
+
+<pre>{JSON.stringify(data, null, 2)}</pre>
+```
+
+<img src="/sveltekit/static/sveltekit-about-page-loade-data-array-of-objects.png">
+
+Again, go to your `about` page and enjoy.. :tada:
+
+<a href="http://localhost:5173/about" target="_blank">http://localhost:5173/about</a>

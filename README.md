@@ -319,3 +319,80 @@ Last not least create a `slot` element, this will render all the pages under thi
 ```
 
 <img src="/sveltekit/static/sveltekit-global-styles-with-layout.png">
+
+**`git checkout 006-create-pages`**
+
+Let's add a few pages to your app.
+
+Create the file `+page.svelte` in the `sveltekit/src/routes/about` folder.
+
+Create a link to the `index` page on the `about` page.
+
+**sveltekit/src/routes/about/+page.svelte**
+
+```html
+<a href="/">Home</a>
+<hr />
+
+<h1>About</h1>
+
+<p>
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi asperiores
+  dolores, quos ducimus aspernatur ex doloribus. Aut illo in non?
+</p>
+```
+
+Create the file `+page.svelte` in the `sveltekit/src/routes/contact` folder.
+
+Create a link to the `index` page on the `contact` page.
+
+**sveltekit/src/routes/contact/+page.svelte**
+
+```html
+<a href="/">Home</a>
+<hr />
+
+<h1>Contact</h1>
+
+<p>
+  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorem dolorum
+  eveniet aperiam. Nostrum laudantium minus facilis reiciendis tempora similique
+  suscipit repellat a eos recusandae. Modi, excepturi officiis sit voluptatum
+  recusandae facere et quam inventore aspernatur aut quo, doloribus placeat eius
+  accusantium ex similique vero optio fugiat totam eos a hic.
+</p>
+```
+
+Create a link to the `about` page on the `index` page.
+
+Create a link to the `contact` page on the `index` page.
+
+**sveltekit/src/routes/+page.svelte**
+
+```html
+<a href="/about">About</a>
+<a href="/contact">Contact</a>
+<hr />
+
+<h1>Welcome to SvelteKit</h1>
+<p>
+  Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the
+  documentation
+</p>
+
+<h2>Hello Everyone</h2>
+
+<style>
+  h1 {
+    color: orange;
+    font-size: 3rem;
+  }
+  h2 {
+    color: cornflowerblue;
+    font-size: 2rem;
+  }
+  p {
+    font-size: 1.4rem;
+  }
+</style>
+```

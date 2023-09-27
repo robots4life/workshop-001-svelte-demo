@@ -746,6 +746,8 @@ Go to your `about` page and just enjoy.. :tada: :smile: :rocket: :sunglasses:
 
 ## 8.0 Fetch Data from a Resource and Load it into a Page
 
+**`git checkout 012-fetch-data-and-load-it-in-a-page`**
+
 So far you have worked with data that you created on the fly on the server, the array of objects, `postsData`, in the `+page.server.ts` file of your `about` page.
 
 Let's have a quick look how you can `fetch` data from a resource and load that into a page.

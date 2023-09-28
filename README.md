@@ -475,10 +475,10 @@ Inside the `script` element you `export` the `data` property that is passed from
 
 **sveltekit/src/routes/about/+page.svelte**
 
-```ts
+```html
 <script lang="ts">
-	import type { PageData } from './$types';
-	export let data: PageData;
+  import type { PageData } from "./$types";
+  export let data: PageData;
 </script>
 
 <pre>{JSON.stringify(data, null, 2)}</pre>
@@ -486,8 +486,8 @@ Inside the `script` element you `export` the `data` property that is passed from
 <h1>About</h1>
 
 <p>
-	Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi asperiores dolores, quos ducimus
-	aspernatur ex doloribus. Aut illo in non?
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi asperiores
+  dolores, quos ducimus aspernatur ex doloribus. Aut illo in non?
 </p>
 ```
 
@@ -679,7 +679,7 @@ Before you work with the data inside the `each` block I recommend to the close t
 
 ```ts
 {#each data.postsData as element, index}
-	// you have access to the postsData elements and index in here
+// you have access to the postsData elements and index in here
 {/each}
 ```
 
@@ -687,10 +687,10 @@ So now let's work with the `postsData` inside the `each` block.
 
 **sveltekit/src/routes/about/+page.svelte**
 
-```ts
+```html
 <script lang="ts">
-	import type { PageData } from './$types';
-	export let data: PageData;
+  import type { PageData } from "./$types";
+  export let data: PageData;
 </script>
 
 <h1>About</h1>
@@ -698,8 +698,8 @@ So now let's work with the `postsData` inside the `each` block.
 <!-- <pre>{JSON.stringify(data, null, 2)}</pre> -->
 
 {#each data.postsData as element, index}
-	<div>index: {index}</div>
-	<div>element : {element}</div>
+<div>index: {index}</div>
+<div>element : {element}</div>
 {/each}
 ```
 
@@ -709,10 +709,10 @@ So now let's work with the `postsData` inside the `each` block.
 
 Just like accessed the `postsData` property of the `data ` object with dot notation when you passed it to the `each` block you can do the same inside the `each` block with each `element`.
 
-```ts
+```html
 <script lang="ts">
-	import type { PageData } from './$types';
-	export let data: PageData;
+  import type { PageData } from "./$types";
+  export let data: PageData;
 </script>
 
 <h1>About</h1>
@@ -720,11 +720,11 @@ Just like accessed the `postsData` property of the `data ` object with dot notat
 <!-- <pre>{JSON.stringify(data, null, 2)}</pre> -->
 
 {#each data.postsData as element, index}
-	<div>index: {index}</div>
-	<div>element id: {element.id}</div>
-	<div>element title: {element.title}</div>
-	<div>element post: {element.post}</div>
-	<hr />
+<div>index: {index}</div>
+<div>element id: {element.id}</div>
+<div>element title: {element.title}</div>
+<div>element post: {element.post}</div>
+<hr />
 {/each}
 ```
 
@@ -732,13 +732,13 @@ Just like accessed the `postsData` property of the `data ` object with dot notat
 
 If you like, of course you can use different HTML elements for the `postsData`, so a `paragraph` and a `heading` for example.
 
-```ts
+```html
 {#each data.postsData as element, index}
-	<p>index: {index}</p>
-	<p>element id: {element.id}</p>
-	<h1>element title: {element.title}</h1>
-	<p>element post: {element.post}</p>
-	<hr />
+<p>index: {index}</p>
+<p>element id: {element.id}</p>
+<h1>element title: {element.title}</h1>
+<p>element post: {element.post}</p>
+<hr />
 {/each}
 ```
 
@@ -803,10 +803,10 @@ Display the loaded data on your `contact` page.
 
 **sveltekit/src/routes/contact/+page.svelte**
 
-```ts
+```html
 <script lang="ts">
-	import type { PageData } from './$types';
-	export let data: PageData;
+  import type { PageData } from "./$types";
+  export let data: PageData;
 </script>
 
 <h1>Contact</h1>
@@ -828,10 +828,10 @@ Just like did on your `about` page, iterate the `dummyJSONPostsData` object with
 
 **sveltekit/src/routes/contact/+page.svelte**
 
-```ts
+```html
 <script lang="ts">
-	import type { PageData } from './$types';
-	export let data: PageData;
+  import type { PageData } from "./$types";
+  export let data: PageData;
 </script>
 
 <h1>Contact</h1>
@@ -839,15 +839,14 @@ Just like did on your `about` page, iterate the `dummyJSONPostsData` object with
 <!-- <pre>{JSON.stringify(data, null, 2)}</pre> -->
 
 {#each data.dummyJSONPostsData.posts as element, index}
-	<p>index: {index}</p>
-	<p>element id: {element.id}</p>
-	<h1>{element.title}</h1>
-	<p>{element.body}</p>
-	<h3>posted by userId: {element.userId}</h3>
-	<p>tags: {element.tags.toString().replaceAll(',', ', ')}</p>
-	<hr />
+<p>index: {index}</p>
+<p>element id: {element.id}</p>
+<h1>{element.title}</h1>
+<p>{element.body}</p>
+<h3>posted by userId: {element.userId}</h3>
+<p>tags: {element.tags.toString().replaceAll(',', ', ')}</p>
+<hr />
 {/each}
-
 ```
 
 Note what is happening to the post tags.
@@ -1060,45 +1059,44 @@ To display the `return`ed form data on your `app` page you use the `form` proper
 
 **sveltekit/src/routes/app/+page.svelte**
 
-```ts
+```html
 <script lang="ts">
-	import type { ActionData } from './$types';
-	// receive the sent form data on the page with the form property
-	export let form: ActionData;
+  import type { ActionData } from "./$types";
+  // receive the sent form data on the page with the form property
+  export let form: ActionData;
 </script>
 
 <pre>{JSON.stringify(form, null, 2)}</pre>
 
 <form id="create_form" method="POST">
-	<label for="create_form_id_value">ID</label>
-	<input
-		type="text"
-		name="create_form_id_value"
-		id="create_form_id_value"
-		value={crypto.randomUUID()}
-	/>
-	<label for="create_form_text_value">Text</label>
-	<input
-		type="text"
-		name="create_form_text_value"
-		id="create_form_text_value"
-		value="Lorem ipsum dolor sit amet."
-	/>
-	<button form="create_form" type="submit">Submit</button>
+  <label for="create_form_id_value">ID</label>
+  <input
+    type="text"
+    name="create_form_id_value"
+    id="create_form_id_value"
+    value="{crypto.randomUUID()}"
+  />
+  <label for="create_form_text_value">Text</label>
+  <input
+    type="text"
+    name="create_form_text_value"
+    id="create_form_text_value"
+    value="Lorem ipsum dolor sit amet."
+  />
+  <button form="create_form" type="submit">Submit</button>
 </form>
 
 <style>
-	form {
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-	}
-	button {
-		border-radius: 12px;
-		margin-block-end: 1rem;
-	}
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  button {
+    border-radius: 12px;
+    margin-block-end: 1rem;
+  }
 </style>
-
 ```
 
 <img src="/sveltekit/static/sveltekit-app-page-default-form-form-property-on-page.png">

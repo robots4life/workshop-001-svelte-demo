@@ -1444,3 +1444,19 @@ export const actions: Actions = {
 :rocket: :muscle: :smile: :tada: :sunglasses:
 
 Can you spot the **difference** to the `default` form action.. :question::question::question::question:
+
+**`git checkout 017-define-type-for-items-array`**
+
+Let's quickly define the type for the `items` array..
+
+**sveltekit/src/routes/app/+page.server.ts**
+
+```ts
+// define the type of the items array
+interface Items {
+  date: Date;
+}
+
+// define an empty array that both the load function and the form action have access to
+const items: Items[] = [];
+```

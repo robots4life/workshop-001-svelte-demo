@@ -1,5 +1,10 @@
+// define the type of the items array
+interface Items {
+	date: Date;
+}
+
 // define an empty array that both the load function and the form action have access to
-const items = [];
+const items: Items[] = [];
 
 import type { PageServerLoad } from './$types';
 

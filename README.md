@@ -889,3 +889,125 @@ history,american,crime
 Go to your `contact` page and check out the posts you `fetch`ed from the DummyJSON API and `load`ed into your page and now display in a Svelte `each` block.. :tada: :sunglasses:
 
 <a href="http://localhost:5173/contact" target="_blank">http://localhost:5173/contact</a>
+
+## 9.0 Handle Forms with SvelteKit
+
+**`git checkout 014-handle-forms-with-sveltekit`**
+
+Let's have a look at how you can deal with forms in SvelteKit.
+
+Create a new folder `app` in the `sveltekit/src/routes` folder, so to speak, create a new route `app`. :tada:
+
+Let's start with a simple form that has an input for an `ID` and some `Text`.
+
+Create a new file `+page.svelte` in the folder `sveltekit/src/routes/app`.
+
+**sveltekit/src/routes/app/+page.svelte**
+
+```html
+<form id="create_form" method="POST" action="?/create">
+  <label for="create_form_id_value">ID</label>
+  <input
+    type="text"
+    name="create_form_id_value"
+    id="create_form_id_value"
+    value="{crypto.randomUUID()}"
+  />
+  <label for="create_form_text_value">Text</label>
+  <input
+    type="text"
+    name="create_form_text_value"
+    id="create_form_text_value"
+    value="Lorem ipsum dolor sit amet."
+  />
+  <button form="create_form" type="submit">Submit</button>
+</form>
+
+<style>
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  button {
+    border-radius: 12px;
+    margin-block-end: 1rem;
+  }
+</style>
+```
+
+**From Element**
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form" target="_blank">Reference -> https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form</a>
+
+**Input Element**
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#type" target="_blank">Reference -> https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#type</a>
+
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#name" target="_blank">Reference -> https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#name</a>
+
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#id" target="_blank">Reference -> https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#id</a>
+
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#value" target="_blank">Reference -> https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#value</a>
+
+**Button Element**
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button" target="_blank">Reference -> https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button</a>
+
+Now to be able to receive the form data sent SvelteKit has so called **form actions**.
+
+<a href="https://kit.svelte.dev/docs/form-actions" target="_blank">Reference -> https://kit.svelte.dev/docs/form-actions</a>
+
+Create a new file `+page.server.ts` in the folder `sveltekit/src/routes/app`.
+
+**sveltekit/src/routes/app/+page.server.ts**
+
+```ts
+import type { Actions } from "@sveltejs/kit";
+
+export const actions: Actions = {
+  default: async ({ request }) => {
+    // https://developer.mozilla.org/en-US/docs/Web/API/Request/formData
+    const form_data = await request.formData();
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/FormData/get
+    const id = form_data.get("create_form_id_value");
+    console.log(id);
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/FormData/get
+    const text = form_data.get("create_form_text_value");
+    console.log(text);
+  },
+};
+```
+
+**Request: formData() method**
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Request/formData" target="_blank">Reference -> https://developer.mozilla.org/en-US/docs/Web/API/Request/formData</a>
+
+**FormData: get() method**
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData/get" target="_blank">Reference -> https://developer.mozilla.org/en-US/docs/Web/API/FormData/get</a>
+
+Last not least, update your `Navigation` component so that you can navigate to you `app` page.
+
+**sveltekit/src/lib/components/Navigation.svelte**
+
+```html
+<a href="/">Home</a>
+<a href="/about">About</a>
+<a href="/contact">Contact</a>
+<a href="/app">App</a>
+<hr />
+```
+
+<img src="/sveltekit/static/sveltekit-app-page-default-form.png">
+
+Submit the form and have a look at the terminal, you should have following output.
+
+```bash
+11:56:46 AM [vite] page reload src/routes/app/+page.server.ts (x4)
+185baa29-5415-4d31-b7d0-bd7daf10fc7c
+Lorem ipsum dolor sit amet.
+60598583-6c1a-4487-b6ba-164e4294f637
+Lorem ipsum dolor sit amet.
+60802eeb-299c-49c3-b46c-325486100793
+Lorem ipsum dolor sit amet.
+```
+
+That is it, you just submitted a form and received its values in SvelteKit on the server. :tada: :muscle: :rocket:

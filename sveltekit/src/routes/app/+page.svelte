@@ -1,3 +1,11 @@
+<script lang="ts">
+	import type { ActionData } from './$types';
+	// receive the sent form data on the page with the form property
+	export let form: ActionData;
+</script>
+
+<pre>{JSON.stringify(form, null, 2)}</pre>
+
 <form id="create_form" method="POST">
 	<label for="create_form_id_value">ID</label>
 	<input

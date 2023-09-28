@@ -955,7 +955,23 @@ Now to be able to receive the form data sent SvelteKit has so called **form acti
 
 <a href="https://kit.svelte.dev/docs/form-actions" target="_blank">Reference -> https://kit.svelte.dev/docs/form-actions</a>
 
+For a normal, default form, SvelteKit has a `default` form action.
+
+<a href="https://kit.svelte.dev/docs/form-actions#default-actions" target="_blank">Reference -> https://kit.svelte.dev/docs/form-actions#default-actions</a>
+
 Create a new file `+page.server.ts` in the folder `sveltekit/src/routes/app`.
+
+You declare an `actions` **object** and inside it use the `default` keyword as **key** for the `actions` **object**.
+
+Once you are writing the **value** associated with the **key** of the **object** you are declaring a **method**.
+
+An **object** that has a **function** as the **value** for any given **key** is called a **method**.
+
+In this case, the `default` method is dealing with receiving the sent form data.
+
+```ts
+export const actions: Actions = { default: ...
+```
 
 **sveltekit/src/routes/app/+page.server.ts**
 
@@ -1011,3 +1027,80 @@ Lorem ipsum dolor sit amet.
 ```
 
 That is it, you just submitted a form and received its values in SvelteKit on the server. :tada: :muscle: :rocket:
+
+Now how about if you like to display the received form data back on your `app` page.
+
+For this you simply return the received data in the `default` form action.
+
+**sveltekit/src/routes/app/+page.server.ts**
+
+```ts
+import type { Actions } from "@sveltejs/kit";
+
+export const actions: Actions = {
+  default: async ({ request }) => {
+    // https://developer.mozilla.org/en-US/docs/Web/API/Request/formData
+    const form_data = await request.formData();
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/FormData/get
+    const id = form_data.get("create_form_id_value");
+    console.log(id);
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/FormData/get
+    const text = form_data.get("create_form_text_value");
+    console.log(text);
+
+    // return the received form data back to the page
+    return { id, text };
+  },
+};
+```
+
+To display the `return`ed form data on your `app` page you use the `form` property that will receive the form data on the page.
+
+**sveltekit/src/routes/app/+page.svelte**
+
+```ts
+<script lang="ts">
+	import type { ActionData } from './$types';
+	// receive the sent form data on the page with the form property
+	export let form: ActionData;
+</script>
+
+<pre>{JSON.stringify(form, null, 2)}</pre>
+
+<form id="create_form" method="POST">
+	<label for="create_form_id_value">ID</label>
+	<input
+		type="text"
+		name="create_form_id_value"
+		id="create_form_id_value"
+		value={crypto.randomUUID()}
+	/>
+	<label for="create_form_text_value">Text</label>
+	<input
+		type="text"
+		name="create_form_text_value"
+		id="create_form_text_value"
+		value="Lorem ipsum dolor sit amet."
+	/>
+	<button form="create_form" type="submit">Submit</button>
+</form>
+
+<style>
+	form {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+	button {
+		border-radius: 12px;
+		margin-block-end: 1rem;
+	}
+</style>
+
+```
+
+<img src="/sveltekit/static/sveltekit-app-page-default-form-form-property-on-page.png">
+
+:tada: :heart: :thumbsup:

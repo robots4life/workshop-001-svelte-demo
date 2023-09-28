@@ -876,9 +876,9 @@ history,american,crime
 
 <img src="/sveltekit/static/sveltekit-contact-page-dummyjson-posts-each-block.png">
 
-**Question** : What is the important different in the `load` function of your `about` page and your `contact` page besides that fact that you work with data from an external resource ?
+**Question** : What is the important difference in the `load` function of your `about` page and your `contact` page besides the fact that you work with data from an external resource ?
 
-**Answer** : You are making the `load` function of your `contact` page asynchronous by prefixing it with the `async` keyword and using `await` to wait for the `fetch` request to complete as well as for the parsing, `.json()`, of the JSON data into a JavaScript object.
+**Answer** : You are making the `load` function of your `contact` page asynchronous by prefixing it with the `async` keyword and using `await` to wait for the `fetch` request to complete as well as for the parsing, `.json()`, of the JSON data into a JavaScript object. This is the case because the resource is an API online and not an in-memory data structure that you work with on disk. It takes time to get the data from the online resource to show up in your app, hence you are using asynchronous JavaScript.
 
 <a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Introducing" target="_blank">Reference -> https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Introducing</a>
 

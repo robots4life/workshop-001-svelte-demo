@@ -309,10 +309,10 @@ Last not least create a `slot` element, this will render all the pages under thi
 
 **sveltekit/src/routes/+layout.svelte**
 
-```ts
+```html
 <script lang="ts">
-    // import your global CSS
-	import '../app.css';
+  // import your global CSS
+  import "../app.css";
 </script>
 
 <slot />

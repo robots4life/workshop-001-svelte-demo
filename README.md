@@ -1305,7 +1305,7 @@ export const actions: Actions = {
 };
 ```
 
-Submit the form on your `app` page a couple of time and see what is going on..
+Submit the form on your `app` page a couple of times and see what is going on..
 
 Try to visualize the flow of data through your app in your head..
 

@@ -6,7 +6,8 @@ interface Items {
 }
 
 // define an empty array that both the load function and the form action have access to
-const items: Items[] = [];
+// as soon as you start to assign the items array to the filtered items array in the delete from action it then has to be declared as let
+let items: Items[] = [];
 
 import type { PageServerLoad } from './$types';
 
@@ -56,5 +57,15 @@ export const actions: Actions = {
 
 		// if you find the item with the received id you can set it's property completed, the boolean, to the opposite of what it currently is
 		if (foundItem) foundItem.completed = !foundItem.completed;
+	},
+
+	delete: async ({ request }) => {
+		const form_data = await request.formData();
+
+		const delete_id = form_data.get('delete_id_value');
+
+		// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
+		// filter the item with the specific id passed to the form action from the app page's delete form action
+		items = items.filter((element) => element.id !== delete_id);
 	}
 };

@@ -1638,3 +1638,46 @@ complete: async ({ request }) => {
 <img src="/sveltekit/static/sveltekit-app-page-complete-form-action.png">
 
 :smile: :rocket: :muscle: :sunglasses: :tada: :smile: :rocket: :muscle: :sunglasses: :tada:
+
+## 13.0 Introduce further Form Action - delete
+
+**`git checkout 020-introduce-delete-action`**
+
+**sveltekit/src/routes/app/+page.svelte**
+
+```html
+<!-- form action "delete" -->
+<!-- create a new form and send the element.id to the form action "delete"-->
+<form id="delete_form" method="POST" action="?/delete">
+  <button form="delete_form" name="delete_id_value" value="{element.id}">
+    delete
+  </button>
+</form>
+```
+
+**sveltekit/src/routes/app/+page.server.ts**
+
+```ts
+// as soon as you start to assign the items array to the filtered items array in the delete from action it then has to be declared as let
+let items: Items[] = [];
+```
+
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter" target="_blank">Reference -> https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter</a>
+
+**sveltekit/src/routes/app/+page.server.ts**
+
+```ts
+	delete: async ({ request }) => {
+		const form_data = await request.formData();
+
+		const delete_id = form_data.get('delete_id_value');
+
+		// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
+		// filter the item with the specific id passed to the form action from the app page's delete form action
+		items = items.filter((element) => element.id !== delete_id);
+	}
+```
+
+<img src="/sveltekit/static/sveltekit-app-page-delete-form-action.png">
+
+:rocket: :sunglasses: :tada: :rocket: :sunglasses: :tada:

@@ -38,6 +38,11 @@
 				>completed : {element.completed}</button
 			>
 		</form>
+		<!-- form action "delete" -->
+		<!-- create a new form and send the element.id to the form action "delete"-->
+		<form id="delete_form" method="POST" action="?/delete">
+			<button form="delete_form" name="delete_id_value" value={element.id}>delete</button>
+		</form>
 	</div>
 {/each}
 

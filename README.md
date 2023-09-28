@@ -1104,3 +1104,217 @@ To display the `return`ed form data on your `app` page you use the `form` proper
 <img src="/sveltekit/static/sveltekit-app-page-default-form-form-property-on-page.png">
 
 :tada: :heart: :thumbsup:
+
+## 10.0 Handle Named Form Actions with SvelteKit
+
+**`git checkout 015-named-form-actions`**
+
+Besides the `default` form action you can supply any name you like for any other form on the page and hence trigger any needed logic with it on the server.
+
+<a href="https://kit.svelte.dev/docs/form-actions#named-actions" target="_blank">Reference -> https://kit.svelte.dev/docs/form-actions#named-actions</a>
+
+One very important aspect to understand about form actions is this.
+
+A page with a form that is submitted triggers the corresponding form action.
+
+**AFTER** the form action has completed running the **`load` function** of your page will run on.
+
+<a href="https://kit.svelte.dev/docs/form-actions#loading-data" target="_blank">Reference -> https://kit.svelte.dev/docs/form-actions#loading-data</a>
+
+_After an action runs, the page will be re-rendered (unless a redirect or an unexpected error occurs), with the action's return value available to the page as the form prop. This means that your page's load functions will run after the action completes._
+
+Let's see how this works..
+
+Define a `load` function in the `+page.server.ts` file of you `app` page.
+
+For now just return the current date to the page.
+
+**sveltekit/src/routes/app/+page.server.ts**
+
+```ts
+import type { PageServerLoad } from "./$types";
+
+export const load: PageServerLoad = async () => {
+  // return the current date to the page's data property
+  return { date: new Date() };
+};
+
+import type { Actions } from "@sveltejs/kit";
+
+export const actions: Actions = {
+  default: async ({ request }) => {
+    // https://developer.mozilla.org/en-US/docs/Web/API/Request/formData
+    const form_data = await request.formData();
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/FormData/get
+    const id = form_data.get("create_form_id_value");
+    console.log(id);
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/FormData/get
+    const text = form_data.get("create_form_text_value");
+    console.log(text);
+
+    // return the received form data back to the page
+    return { id, text };
+  },
+};
+```
+
+In your `app` page now define the `data` property that receives the data from the `load` function.
+
+With
+
+```ts
+<pre>{JSON.stringify(form, null, 2)}</pre>
+```
+
+you display the returned `form` data from the **form action** on the `app` page.
+
+With
+
+```ts
+<pre>{JSON.stringify(data, null, 2)}</pre>
+```
+
+you display the returned `data` from the **load function** on the `app` page.
+
+**sveltekit/src/routes/app/+page.svelte**
+
+```ts
+<script lang="ts">
+	import type { ActionData } from './$types';
+	// receive the sent form data on the page with the form property
+	export let form: ActionData;
+
+	import type { PageData } from './$types';
+	// receive the data from the load function
+	export let data: PageData;
+</script>
+
+<pre>{JSON.stringify(form, null, 2)}</pre>
+
+<pre>{JSON.stringify(data, null, 2)}</pre>
+
+<form id="create_form" method="POST">
+	<label for="create_form_id_value">ID</label>
+	<input
+		type="text"
+		name="create_form_id_value"
+		id="create_form_id_value"
+		value={crypto.randomUUID()}
+	/>
+	<label for="create_form_text_value">Text</label>
+	<input
+		type="text"
+		name="create_form_text_value"
+		id="create_form_text_value"
+		value="Lorem ipsum dolor sit amet."
+	/>
+	<button form="create_form" type="submit">Submit</button>
+</form>
+
+<style>
+	form {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+	button {
+		border-radius: 12px;
+		margin-block-end: 1rem;
+	}
+</style>
+```
+
+<img src="/sveltekit/static/sveltekit-app-page-display-form-data-and-load-data.png" >
+
+So far so good.. :grin: :smile: :heart:
+
+Now how could you demonstrate that the `load` function does indeed run **after** the form action ?
+
+How about you define an array on the server that..
+
+1. you can display on the `app` page from the `load` function
+2. you can add data to inside a form action
+
+:question::question::question::question:
+
+:bulb::bulb::bulb::bulb:
+
+Correct, you define a simple array on the server that is outside the scope of the `load` function and outside the scope of the form action.
+
+You are working with an _in-memory data structure_ here. :muscle:
+
+<a href="https://learn.svelte.dev/tutorial/the-form-element" target="_blank">Reference -> https://learn.svelte.dev/tutorial/the-form-element</a>
+
+1. define an empty array that both the load function and the form action have access to
+
+```ts
+const items = [];
+```
+
+2. return the `items` array to the page's `data` property with the `load` function
+
+```ts
+return { items };
+```
+
+3. push to the `items` array inside the form action
+
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push" target="_blank">Reference -> https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push</a>
+
+```ts
+items.push({ date: new Date() });
+```
+
+**sveltekit/src/routes/app/+page.server.ts**
+
+```ts
+// define an empty array that both the load function and the form action have access to
+const items = [];
+
+import type { PageServerLoad } from "./$types";
+
+export const load: PageServerLoad = async () => {
+  // return the items array to the page's data property with the load function
+  return { items };
+};
+
+import type { Actions } from "@sveltejs/kit";
+
+export const actions: Actions = {
+  default: async ({ request }) => {
+    // https://developer.mozilla.org/en-US/docs/Web/API/Request/formData
+    const form_data = await request.formData();
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/FormData/get
+    const id = form_data.get("create_form_id_value");
+    console.log(id);
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/FormData/get
+    const text = form_data.get("create_form_text_value");
+    console.log(text);
+
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push
+    // push to the items array inside the form action
+    items.push({ date: new Date() });
+
+    // return the received form data back to the page
+    return { id, text };
+  },
+};
+```
+
+Submit the form on your `app` page a couple of time and see what is going on..
+
+Try to visualize the flow of data through your app in your head..
+
+Every time you submit the form a new date is pushed to the `items` array.
+
+After the form action has finished running the `load` function runs.
+
+Last not least, the `load` function loads the updated `data` with the `items` array to the `app` page.
+
+:boom::bulb::zap::exploding_head::boom::bulb::zap::exploding_head::boom::bulb::zap::exploding_head:
+
+<img src="/sveltekit/static/sveltekit-app-page-push-to-items-array-in-form-load-data-in-page.png">

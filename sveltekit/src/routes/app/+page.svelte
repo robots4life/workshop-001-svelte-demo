@@ -2,9 +2,15 @@
 	import type { ActionData } from './$types';
 	// receive the sent form data on the page with the form property
 	export let form: ActionData;
+
+	import type { PageData } from './$types';
+	// receive the data from the load function
+	export let data: PageData;
 </script>
 
 <pre>{JSON.stringify(form, null, 2)}</pre>
+
+<pre>{JSON.stringify(data, null, 2)}</pre>
 
 <form id="create_form" method="POST">
 	<label for="create_form_id_value">ID</label>

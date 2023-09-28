@@ -43,5 +43,18 @@ export const actions: Actions = {
 
 		// return the received form data back to the page
 		return { id, text };
+	},
+
+	complete: async ({ request }) => {
+		const form_data = await request.formData();
+
+		const complete_id = form_data.get('complete_id_value');
+
+		// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+		// find the item with the specific id passed to the form action from the app page's complete form action
+		const foundItem = items.find((element) => element.id === complete_id);
+
+		// if you find the item with the received id you can set it's property completed, the boolean, to the opposite of what it currently is
+		if (foundItem) foundItem.completed = !foundItem.completed;
 	}
 };

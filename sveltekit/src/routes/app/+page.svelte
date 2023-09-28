@@ -31,6 +31,13 @@
 			<div>element text : {element.text}</div>
 			<div>element status : {element.completed}</div>
 		</div>
+		<!-- form action "complete" -->
+		<!-- create a new form and send the element.id to the form action "complete"-->
+		<form id="complete_form" method="POST" action="?/complete">
+			<button form="complete_form" name="complete_id_value" value={element.id}
+				>completed : {element.completed}</button
+			>
+		</form>
 	</div>
 {/each}
 

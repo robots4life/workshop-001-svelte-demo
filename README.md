@@ -1593,3 +1593,48 @@ export const actions: Actions = {
 <img src="/sveltekit/static/sveltekit-app-page-iterate-over-data-with-each-block-start-of-todo-app.png">
 
 :boom::smile::rocket::tada::heart::boom::smile::rocket::tada::heart::boom::smile::rocket::tada::heart:
+
+## 12.0 Introduce further Form Actions - complete
+
+**`git checkout 019-introduce-further-form-actions`**
+
+Next you are going to make it possible to mark a single item^s `completed` state as either `true` or `false`.
+
+For that you need the item `id` and send that to a new form action `complete` in your `+page.server.ts` file.
+
+In the form you can set the value of the `input` element to the item `id` and then when you have that item `id` in the form action `complete` you can find the object with that `id` in the array of objects, the `items` array.
+
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find" target="_blank">Reference -> https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find</a>
+
+**sveltekit/src/routes/app/+page.svelte**
+
+```html
+<!-- form action "complete" -->
+<!-- create a new form and send the element.id to the form action "complete"-->
+<form id="complete_form" method="POST" action="?/complete">
+  <button form="complete_form" name="complete_id_value" value="{element.id}">
+    completed : {element.completed}
+  </button>
+</form>
+```
+
+**sveltekit/src/routes/app/+page.server.ts**
+
+```ts
+complete: async ({ request }) => {
+  const form_data = await request.formData();
+
+  const complete_id = form_data.get("complete_id_value");
+
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+  // find the item with the specific id passed to the form action from the app page's complete form action
+  const foundItem = items.find((element) => element.id === complete_id);
+
+  // if you find the item with the received id you can set it's property completed, the boolean, to the opposite of what it currently is
+  if (foundItem) foundItem.completed = !foundItem.completed;
+};
+```
+
+<img src="/sveltekit/static/sveltekit-app-page-complete-form-action.png">
+
+:smile: :rocket: :muscle: :sunglasses: :tada: :smile: :rocket: :muscle: :sunglasses: :tada:

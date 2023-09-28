@@ -475,10 +475,10 @@ Inside the `script` element you `export` the `data` property that is passed from
 
 **sveltekit/src/routes/about/+page.svelte**
 
-```ts
+```html
 <script lang="ts">
-	import type { PageData } from './$types';
-	export let data: PageData;
+  import type { PageData } from "./$types";
+  export let data: PageData;
 </script>
 
 <pre>{JSON.stringify(data, null, 2)}</pre>
@@ -486,8 +486,8 @@ Inside the `script` element you `export` the `data` property that is passed from
 <h1>About</h1>
 
 <p>
-	Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi asperiores dolores, quos ducimus
-	aspernatur ex doloribus. Aut illo in non?
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi asperiores
+  dolores, quos ducimus aspernatur ex doloribus. Aut illo in non?
 </p>
 ```
 
@@ -679,7 +679,7 @@ Before you work with the data inside the `each` block I recommend to the close t
 
 ```ts
 {#each data.postsData as element, index}
-	// you have access to the postsData elements and index in here
+// you have access to the postsData elements and index in here
 {/each}
 ```
 
@@ -687,10 +687,10 @@ So now let's work with the `postsData` inside the `each` block.
 
 **sveltekit/src/routes/about/+page.svelte**
 
-```ts
+```html
 <script lang="ts">
-	import type { PageData } from './$types';
-	export let data: PageData;
+  import type { PageData } from "./$types";
+  export let data: PageData;
 </script>
 
 <h1>About</h1>
@@ -698,8 +698,8 @@ So now let's work with the `postsData` inside the `each` block.
 <!-- <pre>{JSON.stringify(data, null, 2)}</pre> -->
 
 {#each data.postsData as element, index}
-	<div>index: {index}</div>
-	<div>element : {element}</div>
+<div>index: {index}</div>
+<div>element : {element}</div>
 {/each}
 ```
 
@@ -709,10 +709,10 @@ So now let's work with the `postsData` inside the `each` block.
 
 Just like accessed the `postsData` property of the `data ` object with dot notation when you passed it to the `each` block you can do the same inside the `each` block with each `element`.
 
-```ts
+```html
 <script lang="ts">
-	import type { PageData } from './$types';
-	export let data: PageData;
+  import type { PageData } from "./$types";
+  export let data: PageData;
 </script>
 
 <h1>About</h1>
@@ -720,11 +720,11 @@ Just like accessed the `postsData` property of the `data ` object with dot notat
 <!-- <pre>{JSON.stringify(data, null, 2)}</pre> -->
 
 {#each data.postsData as element, index}
-	<div>index: {index}</div>
-	<div>element id: {element.id}</div>
-	<div>element title: {element.title}</div>
-	<div>element post: {element.post}</div>
-	<hr />
+<div>index: {index}</div>
+<div>element id: {element.id}</div>
+<div>element title: {element.title}</div>
+<div>element post: {element.post}</div>
+<hr />
 {/each}
 ```
 
@@ -732,13 +732,13 @@ Just like accessed the `postsData` property of the `data ` object with dot notat
 
 If you like, of course you can use different HTML elements for the `postsData`, so a `paragraph` and a `heading` for example.
 
-```ts
+```html
 {#each data.postsData as element, index}
-	<p>index: {index}</p>
-	<p>element id: {element.id}</p>
-	<h1>element title: {element.title}</h1>
-	<p>element post: {element.post}</p>
-	<hr />
+<p>index: {index}</p>
+<p>element id: {element.id}</p>
+<h1>element title: {element.title}</h1>
+<p>element post: {element.post}</p>
+<hr />
 {/each}
 ```
 
@@ -803,10 +803,10 @@ Display the loaded data on your `contact` page.
 
 **sveltekit/src/routes/contact/+page.svelte**
 
-```ts
+```html
 <script lang="ts">
-	import type { PageData } from './$types';
-	export let data: PageData;
+  import type { PageData } from "./$types";
+  export let data: PageData;
 </script>
 
 <h1>Contact</h1>

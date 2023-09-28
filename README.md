@@ -1460,3 +1460,136 @@ interface Items {
 // define an empty array that both the load function and the form action have access to
 const items: Items[] = [];
 ```
+
+## 11.0 Iterate over loaded Data with an Each block
+
+**`git checkout 018-iterate-over-loaded-data-with-an-each-block`**
+
+Use an `each` block to iterate over the loaded data for your `app` page.
+
+**sveltekit/src/routes/app/+page.svelte**
+
+```html
+<script lang="ts">
+  import type { PageData } from "./$types";
+  // receive the data from the load function
+  export let data: PageData;
+</script>
+
+<!-- add the form action "create" to the form element -->
+<form id="create_form" method="POST" action="?/create">
+  <label for="create_form_id_value">ID</label>
+  <input
+    type="text"
+    name="create_form_id_value"
+    id="create_form_id_value"
+    value="{crypto.randomUUID()}"
+  />
+  <label for="create_form_text_value">Text</label>
+  <input
+    type="text"
+    name="create_form_text_value"
+    id="create_form_text_value"
+    value="Lorem ipsum dolor sit amet."
+  />
+  <button form="create_form" type="submit">Submit</button>
+</form>
+
+<!-- iterate over the loaded data with an each block -->
+{#each data.items as element}
+<div class="item">
+  <div class="info">
+    <div>element id : {element.id}</div>
+    <div>element text : {element.text}</div>
+    <div>element status : {element.completed}</div>
+  </div>
+</div>
+{/each}
+
+<!-- display the stringified loaded data of the data property of the page -->
+<pre>{JSON.stringify(data, null, 2)}</pre>
+
+<style>
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  button {
+    border-radius: 12px;
+    margin-block-end: 1rem;
+  }
+  .item {
+    background-color: lightskyblue;
+    border-radius: 12px;
+    margin-block-end: 2rem;
+    color: black;
+    padding: 1rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+  }
+  .info {
+    padding-block-end: 2rem;
+  }
+</style>
+```
+
+Change the properties on the `items` array to have an `id`, some `text` and a `completed` property.
+
+Yes, you can already assume what is going on, you are starting to turn your app into a Todo app. :grin:
+
+**sveltekit/src/routes/app/+page.server.ts**
+
+```ts
+// define the type of the items array
+interface Items {
+  id: string | FormDataEntryValue | null;
+  text: string | FormDataEntryValue | null;
+  completed: boolean;
+}
+
+// define an empty array that both the load function and the form action have access to
+const items: Items[] = [];
+
+import type { PageServerLoad } from "./$types";
+
+export const load: PageServerLoad = async () => {
+  // return the items array to the page's data property with the load function
+  return { items };
+};
+
+import type { Actions } from "@sveltejs/kit";
+
+export const actions: Actions = {
+  // change the default form action to the create form action
+  create: async ({ request }) => {
+    // https://developer.mozilla.org/en-US/docs/Web/API/Request/formData
+    const form_data = await request.formData();
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/FormData/get
+    const id = form_data.get("create_form_id_value");
+    console.log(id);
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/FormData/get
+    const text = form_data.get("create_form_text_value");
+    console.log(text);
+
+    // the default state for the item is false
+    const completed = false;
+
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push
+    // push to the items array inside the form action
+    // instead of simply pushing a new date to the items array you now push the 3 properties to the items array
+    // the 3 properties you push to the items array are inside an object
+    // hence you will end up with an array of objects inside the items array
+    items.push({ id, text, completed });
+
+    // return the received form data back to the page
+    return { id, text };
+  },
+};
+```
+
+<img src="/sveltekit/static/sveltekit-app-page-iterate-over-data-with-each-block-start-of-todo-app.png">
+
+:boom::smile::rocket::tada::heart::boom::smile::rocket::tada::heart::boom::smile::rocket::tada::heart:

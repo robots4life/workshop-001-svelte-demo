@@ -1,16 +1,8 @@
 <script lang="ts">
-	import type { ActionData } from './$types';
-	// receive the sent form data on the page with the form property
-	export let form: ActionData;
-
 	import type { PageData } from './$types';
 	// receive the data from the load function
 	export let data: PageData;
 </script>
-
-<pre>{JSON.stringify(form, null, 2)}</pre>
-
-<pre>{JSON.stringify(data, null, 2)}</pre>
 
 <!-- add the form action "create" to the form element -->
 <form id="create_form" method="POST" action="?/create">
@@ -31,6 +23,20 @@
 	<button form="create_form" type="submit">Submit</button>
 </form>
 
+<!-- iterate over the loaded data with an each block -->
+{#each data.items as element}
+	<div class="item">
+		<div class="info">
+			<div>element id : {element.id}</div>
+			<div>element text : {element.text}</div>
+			<div>element status : {element.completed}</div>
+		</div>
+	</div>
+{/each}
+
+<!-- display the stringified loaded data of the data property of the page -->
+<pre>{JSON.stringify(data, null, 2)}</pre>
+
 <style>
 	form {
 		display: flex;
@@ -40,5 +46,17 @@
 	button {
 		border-radius: 12px;
 		margin-block-end: 1rem;
+	}
+	.item {
+		background-color: lightskyblue;
+		border-radius: 12px;
+		margin-block-end: 2rem;
+		color: black;
+		padding: 1rem;
+		font-size: 1.6rem;
+		font-weight: bold;
+	}
+	.info {
+		padding-block-end: 2rem;
 	}
 </style>

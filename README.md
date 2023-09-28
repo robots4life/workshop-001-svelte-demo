@@ -1322,3 +1322,13 @@ Last not least, the `load` function loads the updated `data` with the `items` ar
 **`git checkout 016-introduce-named-form-actions`**
 
 So far you have worked with the `default` form action and you have learned how data flows from your `app` page's form to the server, there to the `default` form action and last not least is then returned back to the `app` page with the `load` function.
+
+Let's introduce a **named form action** at this point..
+
+In the `+page.svelte` file of your `app` page, add a form action to the form element.
+
+**sveltekit/src/routes/app/+page.svelte**
+
+```html
+<form id="create_form" method="POST" action="?/create">...</form>
+```

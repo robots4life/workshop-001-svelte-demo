@@ -12,6 +12,7 @@
 
 <pre>{JSON.stringify(data, null, 2)}</pre>
 
+<!-- add the form action "create" to the form element -->
 <form id="create_form" method="POST" action="?/create">
 	<label for="create_form_id_value">ID</label>
 	<input

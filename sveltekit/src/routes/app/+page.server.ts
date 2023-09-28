@@ -11,7 +11,8 @@ export const load: PageServerLoad = async () => {
 import type { Actions } from '@sveltejs/kit';
 
 export const actions: Actions = {
-	default: async ({ request }) => {
+	// change the default form action to the create form action
+	create: async ({ request }) => {
 		// https://developer.mozilla.org/en-US/docs/Web/API/Request/formData
 		const form_data = await request.formData();
 

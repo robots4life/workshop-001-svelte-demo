@@ -24,7 +24,7 @@
 </form>
 
 <!-- iterate over the loaded data with an each block -->
-{#each data.items as element}
+{#each data.items as element, index}
 	<div class="item">
 		<div class="info">
 			<div>element id : {element.id}</div>
@@ -33,22 +33,22 @@
 		</div>
 		<!-- form action "complete" -->
 		<!-- create a new form and send the element.id to the form action "complete"-->
-		<form id="complete_form" method="POST" action="?/complete">
-			<button form="complete_form" name="complete_id_value" value={element.id}
+		<form id="complete_form_{index}" method="POST" action="?/complete">
+			<button form="complete_form_{index}" name="complete_id_value" value={element.id}
 				>completed : {element.completed}</button
 			>
 		</form>
 		<!-- form action "delete" -->
 		<!-- create a new form and send the element.id to the form action "delete"-->
-		<form id="delete_form" method="POST" action="?/delete">
-			<button form="delete_form" name="delete_id_value" value={element.id}>delete</button>
+		<form id="delete_form_{index}" method="POST" action="?/delete">
+			<button form="delete_form_{index}" name="delete_id_value" value={element.id}>delete</button>
 		</form>
 
 		<!-- form action "update" -->
 		<!-- create a new form and send the element.id as well as the new element.text to the form action "update"-->
-		<form id="update_form" method="POST" action="?/update">
+		<form id="update_form_{index}" method="POST" action="?/update">
 			<input type="text" name="update_text_value" id="update_text_value" value={element.text} />
-			<button form="update_form" name="update_id_value" value={element.id}>update</button>
+			<button form="update_form_{index}" name="update_id_value" value={element.id}>update</button>
 		</form>
 	</div>
 {/each}

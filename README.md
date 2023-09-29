@@ -1726,3 +1726,78 @@ update: async ({ request }) => {
 <img src="/sveltekit/static/sveltekit-app-page-update-form-action.png">
 
 :sunglasses: :tada: :rocket: :sunglasses: :tada: :rocket:
+
+## 15.0 No JavaScript
+
+**`git checkout 022-no-javascript`**
+
+In Chrome Developer Tools hit `ctrl` + `shift` + `p` and type `JavaScript`.
+
+<img src="/sveltekit/static/chrome-devtools-no-javascript.png">
+
+Your Todo App runs without JavaScript.
+
+Well, almost..
+
+If you add 2 or more items and try to update the `text` value, the updated values will not show up on the correct item.
+
+This is because the form elements are inside the `each` block, though they each have the **same** form id.
+
+Just add the `index` to each form id and everything works just fine.
+
+**sveltekit/src/routes/app/+page.svelte**
+
+```html
+<!-- iterate over the loaded data with an each block -->
+{#each data.items as element, index}
+<div class="item">
+  <div class="info">
+    <div>element id : {element.id}</div>
+    <div>element text : {element.text}</div>
+    <div>element status : {element.completed}</div>
+  </div>
+  <!-- form action "complete" -->
+  <!-- create a new form and send the element.id to the form action "complete"-->
+  <form id="complete_form_{index}" method="POST" action="?/complete">
+    <button
+      form="complete_form_{index}"
+      name="complete_id_value"
+      value="{element.id}"
+    >
+      completed : {element.completed}
+    </button>
+  </form>
+  <!-- form action "delete" -->
+  <!-- create a new form and send the element.id to the form action "delete"-->
+  <form id="delete_form_{index}" method="POST" action="?/delete">
+    <button
+      form="delete_form_{index}"
+      name="delete_id_value"
+      value="{element.id}"
+    >
+      delete
+    </button>
+  </form>
+
+  <!-- form action "update" -->
+  <!-- create a new form and send the element.id as well as the new element.text to the form action "update"-->
+  <form id="update_form_{index}" method="POST" action="?/update">
+    <input
+      type="text"
+      name="update_text_value"
+      id="update_text_value"
+      value="{element.text}"
+    />
+    <button
+      form="update_form_{index}"
+      name="update_id_value"
+      value="{element.id}"
+    >
+      update
+    </button>
+  </form>
+</div>
+{/each}
+```
+
+:rocket: :muscle: :smile: :tada: :sunglasses:

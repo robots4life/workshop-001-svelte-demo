@@ -43,6 +43,13 @@
 		<form id="delete_form" method="POST" action="?/delete">
 			<button form="delete_form" name="delete_id_value" value={element.id}>delete</button>
 		</form>
+
+		<!-- form action "update" -->
+		<!-- create a new form and send the element.id as well as the new element.text to the form action "update"-->
+		<form id="update_form" method="POST" action="?/update">
+			<input type="text" name="update_text_value" id="update_text_value" value={element.text} />
+			<button form="update_form" name="update_id_value" value={element.id}>update</button>
+		</form>
 	</div>
 {/each}
 

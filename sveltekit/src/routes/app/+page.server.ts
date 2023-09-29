@@ -55,7 +55,7 @@ export const actions: Actions = {
 		// find the item with the specific id passed to the form action from the app page's complete form action
 		const foundItem = items.find((element) => element.id === complete_id);
 
-		// if you find the item with the received id you can set it's property completed, the boolean, to the opposite of what it currently is
+		// if you find the item with the received id you can set its property completed, the boolean, to the opposite of what it currently is
 		if (foundItem) foundItem.completed = !foundItem.completed;
 	},
 
@@ -67,5 +67,20 @@ export const actions: Actions = {
 		// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
 		// filter the item with the specific id passed to the form action from the app page's delete form action
 		items = items.filter((element) => element.id !== delete_id);
+	},
+
+	update: async ({ request }) => {
+		const form_data = await request.formData();
+
+		const update_id = form_data.get('update_id_value');
+
+		const update_text = form_data.get('update_text_value');
+
+		// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+		// find the item with the specific id passed to the form action from the app page's update form action
+		const foundItem = items.find((element) => element.id === update_id);
+
+		// if you find the item with the received id you can set its property text to the value received through the form
+		if (foundItem) foundItem.text = update_text;
 	}
 };

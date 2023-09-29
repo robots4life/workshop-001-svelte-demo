@@ -1630,7 +1630,7 @@ complete: async ({ request }) => {
   // find the item with the specific id passed to the form action from the app page's complete form action
   const foundItem = items.find((element) => element.id === complete_id);
 
-  // if you find the item with the received id you can set it's property completed, the boolean, to the opposite of what it currently is
+  // if you find the item with the received id you can set its property completed, the boolean, to the opposite of what it currently is
   if (foundItem) foundItem.completed = !foundItem.completed;
 };
 ```

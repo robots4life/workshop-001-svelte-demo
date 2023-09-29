@@ -1801,3 +1801,184 @@ Just add the `index` to each form id and everything works just fine.
 ```
 
 :rocket: :muscle: :smile: :tada: :sunglasses:
+
+## 16.0 Progressive Enhancement
+
+**`git checkout 023-progressive-enhancement`**
+
+<a href="https://kit.svelte.dev/docs/form-actions#progressive-enhancement" target="_blank">Reference -> https://kit.svelte.dev/docs/form-actions#progressive-enhancement</a>
+
+<a href="https://www.kryogenix.org/code/browser/everyonehasjs.html" target="_blank">Reference -> https://www.kryogenix.org/code/browser/everyonehasjs.html</a>
+
+So far you have worked with forms as they come and work natively on the web platform. At the very beginning of this workshop you looked at the default form example that also works without JavaScript. This is how forms work on the web - without JavaScript.
+
+However, if JavaScript is available you can enhance the user experience.
+
+1. no reloading of the page after form submit
+2. no redirecting the user to the page the action is on
+
+For this, SvelteKit has the `use:enhance` action.
+
+_Yes, it's a little confusing that the enhance action and `<form action> `are both called 'action'. SvelteKit is action-packed._ :grin:
+
+The `use:enhance` action among other features, does reset the form after submitting.
+
+This is usually wanted when dealing with forms, the user submits their values and after that sees that the inputs are cleared.
+
+:tada::tada::tada::tada:
+
+However, for the sake of this demo there are 3 little changes in place for the `create` form. This is purely done so you can keep generating new items without having to enter an `id` or a `text` value by hand each time.
+
+1. the `use:enhance` action does not reset the form values for the `create` form
+
+```ts
+	use:enhance={() => {
+		return async ({ update }) => {
+			await update({ reset: false });
+		};
+	}}
+```
+
+2. the submit button calls the `updateRandomUUID()` function for the `create` form
+
+```html
+<button form="create_form" type="submit" on:click={() => updateRandomUUID()}>Submit</button>
+```
+
+3. the `updateRandomUUID()` function returns an updated random UUID
+
+```ts
+let randomId = crypto.randomUUID();
+function updateRandomUUID() {
+  randomId = crypto.randomUUID();
+  return randomId;
+}
+```
+
+4. the `input` element's `value` for the `create` is now bound to the value of the `randomId` variable
+
+```html
+<label for="create_form_id_value">ID</label>
+<input
+  type="text"
+  name="create_form_id_value"
+  id="create_form_id_value"
+  bind:value="{randomId}"
+/>
+```
+
+With this in place you can keep clicking the `Submit` button on the `create` form and each time a new `randomId` will be generated for the new `item` you create in the `items` array of objects.
+
+With all changes in place the `+page.svelte` file for your `app` page now has this code.
+
+**sveltekit/src/routes/app/+page.svelte**
+
+```html
+<script lang="ts">
+	// import enhance
+	import { enhance } from '$app/forms';
+	import type { PageData } from './$types';
+	// receive the data from the load function
+	export let data: PageData;
+
+	let randomId = crypto.randomUUID();
+	function updateRandomUUID() {
+		randomId = crypto.randomUUID();
+		return randomId;
+	}
+</script>
+
+<!-- add the form action "create" to the form element -->
+<!-- add the enhance action to the form -->
+<form
+	id="create_form"
+	method="POST"
+	action="?/create"
+	use:enhance={() => {
+		return async ({ update }) => {
+			await update({ reset: false });
+		};
+	}}
+>
+	<label for="create_form_id_value">ID</label>
+	<input type="text" name="create_form_id_value" id="create_form_id_value" bind:value={randomId} />
+	<label for="create_form_text_value">Text</label>
+	<input
+		type="text"
+		name="create_form_text_value"
+		id="create_form_text_value"
+		value="Lorem ipsum dolor sit amet."
+	/>
+	<button form="create_form" type="submit" on:click={() => updateRandomUUID()}>Submit</button>
+</form>
+
+<!-- iterate over the loaded data with an each block -->
+{#each data.items as element, index}
+	<div class="item">
+		<div class="info">
+			<div>element id : {element.id}</div>
+			<div>element text : {element.text}</div>
+			<div>element status : {element.completed}</div>
+		</div>
+		<!-- form action "complete" -->
+		<!-- create a new form and send the element.id to the form action "complete"-->
+		<form id="complete_form_{index}" method="POST" action="?/complete" use:enhance>
+			<button form="complete_form_{index}" name="complete_id_value" value={element.id}
+				>completed : {element.completed}</button
+			>
+		</form>
+		<!-- form action "delete" -->
+		<!-- create a new form and send the element.id to the form action "delete"-->
+		<form id="delete_form_{index}" method="POST" action="?/delete" use:enhance>
+			<button form="delete_form_{index}" name="delete_id_value" value={element.id}>delete</button>
+		</form>
+
+		<!-- form action "update" -->
+		<!-- create a new form and send the element.id as well as the new element.text to the form action "update"-->
+		<form id="update_form_{index}" method="POST" action="?/update" use:enhance>
+			<input type="text" name="update_text_value" id="update_text_value" value={element.text} />
+			<button form="update_form_{index}" name="update_id_value" value={element.id}>update</button>
+		</form>
+	</div>
+{/each}
+
+<!-- display the stringified loaded data of the data property of the page -->
+<pre>{JSON.stringify(data, null, 2)}</pre>
+
+<style>
+	form {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+	button {
+		border-radius: 12px;
+		margin-block-end: 1rem;
+	}
+	.item {
+		background-color: lightskyblue;
+		border-radius: 12px;
+		margin-block-end: 2rem;
+		color: black;
+		padding: 1rem;
+		font-size: 1.6rem;
+		font-weight: bold;
+	}
+	.info {
+		padding-block-end: 2rem;
+	}
+</style>
+```
+
+:champagne: :sparkles: :heart: :bouquet: :champagne: :sparkles: :heart: :bouquet: :champagne: :sparkles: :heart: :bouquet: :champagne: :sparkles: :heart: :bouquet:
+
+1. you made a website
+2. you created a few pages for the website
+3. you used data from the server in your markup and displayed it with an `each` block
+4. you used data from an API to display posts with an `each` block
+5. you built a little Todo app using forms and form actions
+6. you used progressive enhancement
+
+I sincerely hope that you had a fun time and enjoyed this little intro to Svelte and SvelteKit.
+
+Thank you.

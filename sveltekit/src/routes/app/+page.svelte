@@ -1,18 +1,31 @@
 <script lang="ts">
+	// import enhance
+	import { enhance } from '$app/forms';
 	import type { PageData } from './$types';
 	// receive the data from the load function
 	export let data: PageData;
+
+	let randomId = crypto.randomUUID();
+	function updateRandomUUID() {
+		randomId = crypto.randomUUID();
+		return randomId;
+	}
 </script>
 
 <!-- add the form action "create" to the form element -->
-<form id="create_form" method="POST" action="?/create">
+<!-- add the enhance action to the form -->
+<form
+	id="create_form"
+	method="POST"
+	action="?/create"
+	use:enhance={() => {
+		return async ({ update }) => {
+			await update({ reset: false });
+		};
+	}}
+>
 	<label for="create_form_id_value">ID</label>
-	<input
-		type="text"
-		name="create_form_id_value"
-		id="create_form_id_value"
-		value={crypto.randomUUID()}
-	/>
+	<input type="text" name="create_form_id_value" id="create_form_id_value" bind:value={randomId} />
 	<label for="create_form_text_value">Text</label>
 	<input
 		type="text"
@@ -20,7 +33,7 @@
 		id="create_form_text_value"
 		value="Lorem ipsum dolor sit amet."
 	/>
-	<button form="create_form" type="submit">Submit</button>
+	<button form="create_form" type="submit" on:click={() => updateRandomUUID()}>Submit</button>
 </form>
 
 <!-- iterate over the loaded data with an each block -->
@@ -33,20 +46,20 @@
 		</div>
 		<!-- form action "complete" -->
 		<!-- create a new form and send the element.id to the form action "complete"-->
-		<form id="complete_form_{index}" method="POST" action="?/complete">
+		<form id="complete_form_{index}" method="POST" action="?/complete" use:enhance>
 			<button form="complete_form_{index}" name="complete_id_value" value={element.id}
 				>completed : {element.completed}</button
 			>
 		</form>
 		<!-- form action "delete" -->
 		<!-- create a new form and send the element.id to the form action "delete"-->
-		<form id="delete_form_{index}" method="POST" action="?/delete">
+		<form id="delete_form_{index}" method="POST" action="?/delete" use:enhance>
 			<button form="delete_form_{index}" name="delete_id_value" value={element.id}>delete</button>
 		</form>
 
 		<!-- form action "update" -->
 		<!-- create a new form and send the element.id as well as the new element.text to the form action "update"-->
-		<form id="update_form_{index}" method="POST" action="?/update">
+		<form id="update_form_{index}" method="POST" action="?/update" use:enhance>
 			<input type="text" name="update_text_value" id="update_text_value" value={element.text} />
 			<button form="update_form_{index}" name="update_id_value" value={element.id}>update</button>
 		</form>

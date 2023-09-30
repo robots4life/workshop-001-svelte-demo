@@ -904,7 +904,7 @@ Create a new file `+page.svelte` in the folder `sveltekit/src/routes/app`.
 **sveltekit/src/routes/app/+page.svelte**
 
 ```html
-<form id="create_form" method="POST" action="?/create">
+<form id="create_form" method="POST">
   <label for="create_form_id_value">ID</label>
   <input
     type="text"

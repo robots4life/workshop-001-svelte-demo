@@ -1,0 +1,12 @@
+{
+	"/": [],
+	"/about": [
+		"src/routes/about/+page.server.ts"
+	],
+	"/app": [
+		"src/routes/app/+page.server.ts"
+	],
+	"/contact": [
+		"src/routes/contact/+page.server.ts"
+	]
+}

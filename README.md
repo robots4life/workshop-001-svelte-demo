@@ -19,9 +19,21 @@ Clone Repository
 
 `gh repo clone robots4life/workshop-001-svelte-demo`
 
-## 2.0 Default Form Example
+This workshop has 16 small chapters and 23 branches.
+
+Go through the workshop by checking out the first branch **`git checkout 001-default-form-example`** and continue from there.
+
+The branch names are numbered form `001`-... to `023`-....
+
+So with tab completion on your terminal you can just type the next number and easily checkout the next branch without having to type the whole name of the next branch.
+
+<a href="https://en.wikipedia.org/wiki/Command-line_completion" target="_blank">https://en.wikipedia.org/wiki/Command-line_completion</a>
+
+Start here.
 
 **`git checkout 001-default-form-example`**
+
+## 2.0 Default Form Example
 
 Let's have a quick look at what a default form with `POST` as `method` does in the browser.
 
@@ -35,9 +47,11 @@ Let's have a quick look at what a default form with `POST` as `method` does in t
 
 <img src="/default-form/img/default-form-payload-values.png">
 
-## 3.0 Create and Install SvelteKit
+Checkout the next branch to continue.
 
 **`git checkout 002-create-and-install-sveltekit`**
+
+## 3.0 Create and Install SvelteKit
 
 Let's create and install SvelteKit.
 
@@ -100,9 +114,11 @@ Stuck? Visit us at https://svelte.dev/chat
 
 `pnpm install`
 
-## 4.0 Tour of SvelteKit
+Checkout the next branch to continue.
 
 **`git checkout 003-tour-of-sveltekit`**
+
+## 4.0 Tour of SvelteKit
 
 Let's run SvelteKit and explore a little bit..
 
@@ -152,7 +168,11 @@ Folders and files **inside** this `routes` folder determine the **structure** of
 
 Web pages in SvelteKit are created with `+page.svelte` files.
 
+Checkout the next branch to continue.
+
 **`git checkout 004-add-styles-to-index-page`**
+
+Web pages in SvelteKit are created with `+page.svelte` files.
 
 Let's style the index page a little bit.
 
@@ -185,6 +205,8 @@ Open a `style` element under the `h2` element and style the page to your liking,
 ```
 
 <img src="/sveltekit/static/sveltekit-style-index-page.png">
+
+Checkout the next branch to continue.
 
 **`git checkout 005-create-global-styles`**
 
@@ -309,16 +331,18 @@ Last not least create a `slot` element, this will render all the pages under thi
 
 **sveltekit/src/routes/+layout.svelte**
 
-```ts
+```html
 <script lang="ts">
-    // import your global CSS
-	import '../app.css';
+  // import your global CSS
+  import "../app.css";
 </script>
 
 <slot />
 ```
 
 <img src="/sveltekit/static/sveltekit-global-styles-with-layout.png">
+
+Checkout the next branch to continue.
 
 **`git checkout 006-create-pages`**
 
@@ -399,6 +423,8 @@ Create a link to the `contact` page on the `index` page.
 </style>
 ```
 
+Checkout the next branch to continue.
+
 **`git checkout 007-create-navigation-component`**
 
 Instead of having the link to the `index`, `about` and `contact` page inside the markup for those pages you can use a `Navigation` component.
@@ -437,9 +463,11 @@ To use your `Navigation` component you import it from the folder where you creat
 
 Make sure to remove the hard coded anchor elements from the `index`, `about` and `contact` page.
 
-## 5.0 Loading Data for Pages
+Checkout the next branch to continue.
 
 **`git checkout 008-loading-data-for-pages`**
+
+## 5.0 Loading Data for Pages
 
 You already have a few pages up and running, nice. :tada:
 
@@ -497,9 +525,11 @@ Go to your `about` page and admire the data you have just loaded into the page. 
 
 <img src="/sveltekit/static/sveltekit-about-page-load-data.png">
 
-## 6.0 Work with Loaded Data in Page Markup
+Checkout the next branch to continue.
 
 **`git checkout 009-work-with-loaded-data-in-page-markup`**
+
+## 6.0 Work with Loaded Data in Page Markup
 
 Let's have a look at how you can work with the loaded data in a page.
 
@@ -549,9 +579,11 @@ Again, go to your `about` page and admire the data you have just loaded into the
 
 <a href="http://localhost:5173/about" target="_blank">http://localhost:5173/about</a>
 
-## 7.0 Work with an Array of Objects in Page Markup
+Checkout the next branch to continue.
 
 **`git checkout 010-work-with-array-of-objects-in-page-markup`**
+
+## 7.0 Work with an Array of Objects in Page Markup
 
 Let's you have more than just a simple object that you are loading into your page.
 
@@ -620,6 +652,8 @@ Let's quickly have a look at the returned data that is passed to your `about` pa
 Again, go to your `about` page and enjoy.. :tada:
 
 <a href="http://localhost:5173/about" target="_blank">http://localhost:5173/about</a>
+
+Checkout the next branch to continue.
 
 **`git checkout 011-use-each-block-with-array-of-objects-in-page`**
 
@@ -746,9 +780,11 @@ Go to your `about` page and just enjoy.. :tada: :smile: :rocket: :sunglasses:
 
 <a href="http://localhost:5173/about" target="_blank">http://localhost:5173/about</a>
 
-## 8.0 Fetch Data from a Resource and Load it into a Page
+Checkout the next branch to continue.
 
 **`git checkout 012-fetch-data-and-load-it-in-a-page`**
+
+## 8.0 Fetch Data from a Resource and Load it into a Page
 
 So far you have worked with data that you created on the fly on the server, the array of objects, `postsData`, in the `+page.server.ts` file of your `about` page.
 
@@ -820,9 +856,11 @@ Go to your `contact` page and check out the posts you `fetch`ed from the DummyJS
 
 <a href="http://localhost:5173/contact" target="_blank">http://localhost:5173/contact</a>
 
-### 8.1 Use an Each block on the Contact Page for the Posts Data
+Checkout the next branch to continue.
 
 **`git checkout 013-use-each-block-for-posts-data-on-contact-page`**
+
+### 8.1 Use an Each block on the Contact Page for the Posts Data
 
 Just like did on your `about` page, iterate the `dummyJSONPostsData` object with an `each` block.
 
@@ -889,9 +927,11 @@ Go to your `contact` page and check out the posts you `fetch`ed from the DummyJS
 
 <a href="http://localhost:5173/contact" target="_blank">http://localhost:5173/contact</a>
 
-## 9.0 Handle Forms with SvelteKit
+Checkout the next branch to continue.
 
 **`git checkout 014-handle-forms-with-sveltekit`**
+
+## 9.0 Handle Forms with SvelteKit
 
 Let's have a look at how you can deal with forms in SvelteKit.
 
@@ -1102,3 +1142,7 @@ To display the `return`ed form data on your `app` page you use the `form` proper
 <img src="/sveltekit/static/sveltekit-app-page-default-form-form-property-on-page.png">
 
 :tada: :heart: :thumbsup:
+
+Checkout the next branch to continue.
+
+**`git checkout 015-named-form-actions`**

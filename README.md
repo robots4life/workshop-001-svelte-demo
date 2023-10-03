@@ -19,9 +19,21 @@ Clone Repository
 
 `gh repo clone robots4life/workshop-001-svelte-demo`
 
-## 2.0 Default Form Example
+This workshop has 16 small chapters and 23 branches.
+
+Go through the workshop by checking out the first branch **`git checkout 001-default-form-example`** and continue from there.
+
+The branch names are numbered form `001`-... to `023`-....
+
+So with tab completion on your terminal you can just type the next number and easily checkout the next branch without having to type the whole name of the next branch.
+
+<a href="https://en.wikipedia.org/wiki/Command-line_completion" target="_blank">https://en.wikipedia.org/wiki/Command-line_completion</a>
+
+Start here.
 
 **`git checkout 001-default-form-example`**
+
+## 2.0 Default Form Example
 
 Let's have a quick look at what a default form with `POST` as `method` does in the browser.
 
@@ -35,9 +47,11 @@ Let's have a quick look at what a default form with `POST` as `method` does in t
 
 <img src="/default-form/img/default-form-payload-values.png">
 
-## 3.0 Create and Install SvelteKit
+Checkout the next branch to continue.
 
 **`git checkout 002-create-and-install-sveltekit`**
+
+## 3.0 Create and Install SvelteKit
 
 Let's create and install SvelteKit.
 
@@ -99,3 +113,7 @@ Stuck? Visit us at https://svelte.dev/chat
 `npm install`
 
 `pnpm install`
+
+Checkout the next branch to continue.
+
+**`git checkout 003-tour-of-sveltekit`**

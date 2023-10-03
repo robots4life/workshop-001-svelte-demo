@@ -19,9 +19,21 @@ Clone Repository
 
 `gh repo clone robots4life/workshop-001-svelte-demo`
 
-## 2.0 Default Form Example
+This workshop has 16 small chapters and 23 branches.
+
+Go through the workshop by checking out the first branch **`git checkout 001-default-form-example`** and continue from there.
+
+The branch names are numbered form `001`-... to `023`-....
+
+So with tab completion on your terminal you can just type the next number and easily checkout the next branch without having to type the whole name of the next branch.
+
+<a href="https://en.wikipedia.org/wiki/Command-line_completion" target="_blank">https://en.wikipedia.org/wiki/Command-line_completion</a>
+
+Start here.
 
 **`git checkout 001-default-form-example`**
+
+## 2.0 Default Form Example
 
 Let's have a quick look at what a default form with `POST` as `method` does in the browser.
 
@@ -35,9 +47,11 @@ Let's have a quick look at what a default form with `POST` as `method` does in t
 
 <img src="/default-form/img/default-form-payload-values.png">
 
-## 3.0 Create and Install SvelteKit
+Checkout the next branch to continue.
 
 **`git checkout 002-create-and-install-sveltekit`**
+
+## 3.0 Create and Install SvelteKit
 
 Let's create and install SvelteKit.
 
@@ -100,9 +114,11 @@ Stuck? Visit us at https://svelte.dev/chat
 
 `pnpm install`
 
-## 4.0 Tour of SvelteKit
+Checkout the next branch to continue.
 
 **`git checkout 003-tour-of-sveltekit`**
+
+## 4.0 Tour of SvelteKit
 
 Let's run SvelteKit and explore a little bit..
 
@@ -152,7 +168,11 @@ Folders and files **inside** this `routes` folder determine the **structure** of
 
 Web pages in SvelteKit are created with `+page.svelte` files.
 
+Checkout the next branch to continue.
+
 **`git checkout 004-add-styles-to-index-page`**
+
+Web pages in SvelteKit are created with `+page.svelte` files.
 
 Let's style the index page a little bit.
 
@@ -185,6 +205,8 @@ Open a `style` element under the `h2` element and style the page to your liking,
 ```
 
 <img src="/sveltekit/static/sveltekit-style-index-page.png">
+
+Checkout the next branch to continue.
 
 **`git checkout 005-create-global-styles`**
 
@@ -309,16 +331,18 @@ Last not least create a `slot` element, this will render all the pages under thi
 
 **sveltekit/src/routes/+layout.svelte**
 
-```ts
+```html
 <script lang="ts">
-    // import your global CSS
-	import '../app.css';
+  // import your global CSS
+  import "../app.css";
 </script>
 
 <slot />
 ```
 
 <img src="/sveltekit/static/sveltekit-global-styles-with-layout.png">
+
+Checkout the next branch to continue.
 
 **`git checkout 006-create-pages`**
 
@@ -399,6 +423,8 @@ Create a link to the `contact` page on the `index` page.
 </style>
 ```
 
+Checkout the next branch to continue.
+
 **`git checkout 007-create-navigation-component`**
 
 Instead of having the link to the `index`, `about` and `contact` page inside the markup for those pages you can use a `Navigation` component.
@@ -437,9 +463,11 @@ To use your `Navigation` component you import it from the folder where you creat
 
 Make sure to remove the hard coded anchor elements from the `index`, `about` and `contact` page.
 
-## 5.0 Loading Data for Pages
+Checkout the next branch to continue.
 
 **`git checkout 008-loading-data-for-pages`**
+
+## 5.0 Loading Data for Pages
 
 You already have a few pages up and running, nice. :tada:
 
@@ -497,9 +525,11 @@ Go to your `about` page and admire the data you have just loaded into the page. 
 
 <img src="/sveltekit/static/sveltekit-about-page-load-data.png">
 
-## 6.0 Work with Loaded Data in Page Markup
+Checkout the next branch to continue.
 
 **`git checkout 009-work-with-loaded-data-in-page-markup`**
+
+## 6.0 Work with Loaded Data in Page Markup
 
 Let's have a look at how you can work with the loaded data in a page.
 
@@ -548,3 +578,7 @@ To use data in the page markup simply use curly brackets `{}` and reference the 
 Again, go to your `about` page and admire the data you have just loaded into the page and are using inside curly brackets in your page markup. :tada: :muscle: :sunglasses: :cool:
 
 <a href="http://localhost:5173/about" target="_blank">http://localhost:5173/about</a>
+
+Checkout the next branch to continue.
+
+**`git checkout 010-work-with-array-of-objects-in-page-markup`**
